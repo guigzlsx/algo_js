@@ -1,71 +1,80 @@
 let equipemancheAttaque = 0;
 let equipemancheDefense = 0;
 
-// let Joueur = {
-//   init: function (nom, typEquipe) {
-//     this.nom = nom + " (" + typEquipe + ")";
-//   },
-// };
 let joueurs = ["Cypher", "Omen", "Phoenix", "Astra", "Killjoy"];
 let equipes = ["Attaquant", "Defenseur"];
-// let joueurs = [];
 
-let joueurEquipeAttaque = joueurs[Math.floor(Math.random() * joueurs.length)];
-let equipeAttaque = equipes[Math.floor(Math.random() * equipes.length)];
+while (equipemancheAttaque < 13 && equipemancheDefense < 13) {
+  let equipeAttaquanteJoueurs = Array.from(joueurs);
+  let equipeDefenseJoueurs = Array.from(joueurs);
 
-// histoire que tout le monde participe
-console.log(joueurs.indexOf(joueurEquipeAttaque));
-joueurs.splice(joueurs.indexOf(joueurEquipeAttaque), 1);
+  while (
+    equipeAttaquanteJoueurs.length > 0 &&
+    equipeDefenseJoueurs.length > 0
+  ) {
+    let equipeAleatoire = equipes[Math.floor(Math.random() * equipes.length)];
+    let joueurAleatoire =
+      equipeAleatoire === "Attaquant"
+        ? equipeAttaquanteJoueurs[
+            Math.floor(Math.random() * equipeAttaquanteJoueurs.length)
+          ]
+        : equipeDefenseJoueurs[
+            Math.floor(Math.random() * equipeDefenseJoueurs.length)
+          ];
 
-let joueurEquipeDefense = joueurs[Math.floor(Math.random() * joueurs.length)];
-let equipeDefense = equipes.find((equipe) => equipe !== equipeAttaque);
+    let joueurMort = "";
+    let action = "";
 
-let resultat =
-  joueurEquipeAttaque +
-  " de l'équipe " +
-  equipeAttaque +
-  " contre " +
-  joueurEquipeDefense +
-  " de l'équipe " +
-  equipeDefense;
+    if (Math.random() < 0.6) {
+      joueurMort = "défenseur";
+      action = "amorce le spike";
+    } else {
+      joueurMort = "attaquant";
+      action = "tue son adversaire";
+    }
 
-console.log(resultat);
+    if (Math.random() < 0.7 && action.includes("amorce le spike")) {
+      action += ", l'attaquant l'emporte sur le défenseur";
+    } else {
+      action += ", 50/50 duel nul";
+    }
 
-while (equipemancheAttaque < 13 || equipemancheDefense < 13) {
-  let equipeAleatoire = equipes[Math.floor(Math.random() * equipes.length)];
-  let joueurAleatoire = joueurs[Math.floor(Math.random() * joueurs.length)];
+    console.log(joueurAleatoire + " de " + equipeAleatoire + " " + action);
 
-  let joueurMort = "";
-  let action = "";
-
-  if (Math.random() < 0.6) {
-    joueurMort = "défenseur";
-    action = "amorce le spike";
-  } else {
-    joueurMort = "attaquant";
-    action = "tue son adversaire";
+    if (equipeAleatoire === "Attaquant") {
+      equipeAttaquanteJoueurs.splice(
+        equipeAttaquanteJoueurs.indexOf(joueurAleatoire),
+        1
+      );
+    } else {
+      equipeDefenseJoueurs.splice(
+        equipeDefenseJoueurs.indexOf(joueurAleatoire),
+        1
+      );
+    }
   }
 
-  if (Math.random() < 0.7 && action === "amorce le spike") {
-    action += ", l'attaquant l'emporte sur le défenseur";
-  } else {
-    action += ", 50/50 duel nul";
-  }
-
-  console.log(joueurAleatoire + " de " + equipeAleatoire + " " + action);
-
-  //le ptn de score ne fonctionne pas
-  if (equipeAleatoire === "Attaquant") {
-    equipemancheAttaque++;
-  } else {
+  if (equipeAttaquanteJoueurs.length === 0) {
+    console.log(
+      "L'équipe des attaquants a été éliminée. Les défenseurs gagnent cette manche !"
+    );
     equipemancheDefense++;
+  } else {
+    console.log(
+      "L'équipe des défenseurs a été éliminée. Les attaquants gagnent cette manche !"
+    );
+    equipemancheAttaque++;
   }
 }
 
 if (equipemancheAttaque === 13) {
-  console.log("L'équipe des attaquants a marbré les defenseurs !");
+  console.log(
+    "L'équipe des attaquants a remporté 13 manches et et a marbré les défenseurs !"
+  );
 } else if (equipemancheDefense === 13) {
-  console.log("L'équipe des défenseurs a gagnée !");
+  console.log(
+    "L'équipe des défenseurs a remporté 13 manches et a marbré les attaquants !"
+  );
 } else {
   console.log("La partie s'est terminée sans gagnant.");
 }
