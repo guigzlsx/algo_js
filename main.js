@@ -7,6 +7,7 @@ let equipes = ["Attaquant", "Defenseur"];
 
 //Tant que des deux equipes n'a pas 13 manches gagnées
 while (equipemancheAttaque < 13 && equipemancheDefense < 13) {
+  console.log("La partie commence !");
   let equipeAttaquanteJoueurs = Array.from(joueurs);
   let equipeDefenseJoueurs = Array.from(joueurs);
 
