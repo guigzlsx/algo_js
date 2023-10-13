@@ -48,7 +48,7 @@ while (equipemancheAttaque <= 13 || equipemancheDefense <= 13) {
   if (Math.random() < 0.7 && action === "amorce le spike") {
     action += ", l'attaquant l'emporte sur le défenseur";
   } else {
-    action += ", duel équilibré";
+    action += ", 50/50 duel nul";
   }
 
   console.log(joueurAleatoire + " de " + equipeAleatoire + " " + action);
@@ -60,7 +60,15 @@ while (equipemancheAttaque <= 13 || equipemancheDefense <= 13) {
   }
 }
 
-console.log("Fin de la partie !");
+if (equipeAttaque === 13) {
+  console.log("L'équipe des attaquants a marbré les defenseurs !");
+} else if (equipeDefense === 13) {
+  console.log("L'équipe des défenseurs a gagnée !");
+} else {
+  console.log("La partie s'est terminée sans gagnant.");
+}
+
+console.log("Fin de game !");
 
 // for (let i = 0; i <= 2; i++) {
 //   let nom = equipe[Math.floor(Math.random() * equipe.length)];
