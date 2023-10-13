@@ -1,5 +1,6 @@
 let equipemancheAttaque = 0;
 let equipemancheDefense = 0;
+
 // let Joueur = {
 //   init: function (nom, typEquipe) {
 //     this.nom = nom + " (" + typEquipe + ")";
@@ -30,7 +31,7 @@ let resultat =
 
 console.log(resultat);
 
-while (equipemancheAttaque <= 13 || equipemancheDefense <= 13) {
+while (equipemancheAttaque < 13 || equipemancheDefense < 13) {
   let equipeAleatoire = equipes[Math.floor(Math.random() * equipes.length)];
   let joueurAleatoire = joueurs[Math.floor(Math.random() * joueurs.length)];
 
@@ -53,6 +54,7 @@ while (equipemancheAttaque <= 13 || equipemancheDefense <= 13) {
 
   console.log(joueurAleatoire + " de " + equipeAleatoire + " " + action);
 
+  //le ptn de score ne fonctionne pas
   if (equipeAleatoire === "Attaquant") {
     equipemancheAttaque++;
   } else {
@@ -60,9 +62,9 @@ while (equipemancheAttaque <= 13 || equipemancheDefense <= 13) {
   }
 }
 
-if (equipeAttaque === 13) {
+if (equipemancheAttaque === 13) {
   console.log("L'équipe des attaquants a marbré les defenseurs !");
-} else if (equipeDefense === 13) {
+} else if (equipemancheDefense === 13) {
   console.log("L'équipe des défenseurs a gagnée !");
 } else {
   console.log("La partie s'est terminée sans gagnant.");
